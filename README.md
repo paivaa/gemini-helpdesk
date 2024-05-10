@@ -24,7 +24,7 @@ Atenção: As instruções abaixo podem ser alteradas em versões futuras do pro
 
 2 - Crie um projeto Apps Script: Na planilha que recebe as respostas do formulário, crie um projeto Apps Script.
 
-3 - Copie o código: Copie todo o código do arquivo "Código.gs" deste repositório e cole no "Código.gs" do seu novo projeto.
+3 - Copie o código: Copie todo o código do arquivo "codigo.gs" deste repositório e cole no "Código.gs" do seu novo projeto.
 
 4 - Configure a API Key: Em "Configurações do Projeto" > "Propriedades do script", crie uma nova propriedade chamada "API_KEY" e cole sua chave de API do Gemini como valor. Salve as alterações.
 
