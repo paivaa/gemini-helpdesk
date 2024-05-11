@@ -88,13 +88,54 @@ function callGemini_({ cargo, descricao_problema, email, nome_completo  }) {
     console.error("Servidor ocupado. Tente Novamente.");
     return
   }
+
+let sla = 0;
+  
+  if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
+    sla = 2;
+  }else if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade.includes("m")){
+    sla = 3;
+  }else if(!dados_tratados.disponibilidade.includes("parcialmente")  && dados_tratados.prioridade == "baixa"){
+    sla = 4;
+  }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
+    sla = 4;
+  }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade.includes("m")){
+    sla = 8;
+  }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "baixa"){
+    sla = 15;
+  }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade == "alta"){
+    sla = 3;
+  }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade.includes("m")){
+    sla = 5;
+  }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade == "baixa"){
+    sla = 20;
+  }
+
+  let hoje = new Date()
+  let data_final = new Date(new Date().setDate(new Date().getDate() + sla));
+  let numero_ticket = getRandomInt_(1, 10000000)
+
   //escrita na planilha
     
-  aba.appendRow([email, nome_completo, cargo, descricao_problema, dados_tratados.categoria, dados_tratados.disponibilidade, dados_tratados.prioridade, "Criado"]);
+  aba.appendRow([email, nome_completo, cargo, descricao_problema, dados_tratados.categoria, dados_tratados.disponibilidade, dados_tratados.prioridade, "Criado", hoje, sla, data_final, numero_ticket]);
   SpreadsheetApp.flush();
+
+  //envia para o usuário uma notificação via email com o prazo do SLA do chamado
+  GmailApp.sendEmail(email.toLowerCase().trim(),
+    "CHAMADO ABERTO - TICKET #"+numero_ticket,
+    "Saudações,\n\nSeu chamado foi aberto com sucesso!\n\nO prazo para resolução é de até " + sla + " dias utéis a partir da abertura do chamado. \n\nPara dúvidas e acompanhamento, entrar em contato com o suportehelpdesk@fakecompany.com enviando o número do ticket do chamado.\n\n\n\nEsta Mensagem é gerada automaticamente.", {
+    name: 'Gemini Helpdesk',
+    noReply: true
+  });
+
   lock.releaseLock();
   
   return
+}
+
+//gera um numero inteiro aleatorio entre dois numeros
+function getRandomInt_(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 //retorna o objeto aba da planilha com base em seu id
