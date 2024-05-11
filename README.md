@@ -2,7 +2,7 @@
 
 ## Objetivo 🎯
 
-Este projeto utiliza o poder do Google AI Gemini para analisar chamados de TI inputados via formulário (Google Forms) e categorizá-los automaticamente. Através do Apps Script, as informações processadas pela IA são adicionadas a uma base de dados (Google Sheets), que alimenta um dashboard web em tempo real. 📈
+Este projeto utiliza o poder do Google AI Gemini para analisar chamados de TI inputados via formulário (Google Forms) e categorizá-los automaticamente. Através do Apps Script, as informações processadas pela IA são adicionadas a uma base de dados (Google Sheets), que alimenta um dashboard web em tempo real. 📈 O usuário também recebe uma notificação via email contendo o número do chamado e o prazo do SLA do chamado.✉️
 
 Link Dashboard exemplo: https://docs.google.com/spreadsheets/d/e/2PACX-1vSylMv4BoXm5haaH1DQV8Fo2v-tNk0syV4UpYBfjCV6tf12uTki01HRJNseWQr_BzNFNXfHzywigkEg/pubhtml?gid=1217744822&single=true
 
