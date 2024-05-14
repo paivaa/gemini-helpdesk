@@ -89,26 +89,36 @@ function callGemini_({ cargo, descricao_problema, email, nome_completo  }) {
     return
   }
 
-let sla = 0;
+//calculo do SLA e padronização do texto de acordo com a disponibilidade e/prioridade
+  let sla = 0;
   
-  if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
-    sla = 2;
-  }else if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade.includes("m")){
-    sla = 3;
-  }else if(!dados_tratados.disponibilidade.includes("parcialmente")  && dados_tratados.prioridade == "baixa"){
-    sla = 4;
-  }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
+  if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
+    dados_tratados.disponibilidade = "parcialmente indisponível";
     sla = 4;
   }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade.includes("m")){
+    dados_tratados.disponibilidade = "parcialmente indisponível";
+    dados_tratados.prioridade = "média";
     sla = 8;
   }else if(dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "baixa"){
+    dados_tratados.disponibilidade = "parcialmente indisponível"
     sla = 15;
   }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade == "alta"){
     sla = 3;
   }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade.includes("m")){
+    dados_tratados.prioridade = "média";
     sla = 5;
   }else if(dados_tratados.disponibilidade.includes("aplica") && dados_tratados.prioridade == "baixa"){
     sla = 20;
+  }else if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade == "alta"){
+    dados_tratados.disponibilidade = "indisponível"
+    sla = 2;
+  }else if(!dados_tratados.disponibilidade.includes("parcialmente") && dados_tratados.prioridade.includes("m")){
+    dados_tratados.disponibilidade = "indisponível"
+    dados_tratados.prioridade = "média";
+    sla = 3;
+  }else if(!dados_tratados.disponibilidade.includes("parcialmente")  && dados_tratados.prioridade == "baixa"){
+    dados_tratados.disponibilidade = "indisponível"
+    sla = 4;
   }
 
   let hoje = new Date()
