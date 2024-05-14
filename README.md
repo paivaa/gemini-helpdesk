@@ -13,7 +13,7 @@ Link Google Forms abertura de chamados: https://forms.gle/rN41VQt4S2dkB9rC7
 Os chamados são classificados em três categorias:
 
 * Natureza: 💻 Software, 🖥️ Hardware, 🌐 Rede, ⚙️ Sistema Operacional, 👥 Gerência de Usuários, etc.
-* Disponibilidade: ❌ Indisponível, ⚠️ Parcialmente Disponível, ✅ Não se Aplica.
+* Disponibilidade: ❌ Indisponível, ⚠️ Parcialmente Indisponível, ✅ Não se Aplica.
 * Prioridade: 🔺 Alta, 🔶 Média, 🔷 Baixa.
   
 ## Replicação do Projeto 🔨
